@@ -6,9 +6,9 @@ from telegram.ext import Updater, CommandHandler
 from game_logic import BlackjackGame
 import time
 
-START_GAME_TIMER = 20  # 1 minute
-JOIN_GAME_TIMER = 20  # 1 minute
-TURN_TIMER = 30  # 2 minutes
+START_GAME_TIMER = 20  # 20 seconds
+JOIN_GAME_TIMER = 20  # 20 seconds
+TURN_TIMER = 30  # 30 seconds
 
 
 class BlackJackBot:
@@ -194,6 +194,13 @@ class BlackJackBot:
                         f'{repr(self.game.current_player)} has busted with a total of {total}!'
                     )
                     self.game.bust_player(self.game.current_player)
+                elif total == 21:
+                    update.message.reply_text(
+                        f'🃏 blackjack! 🃏\n\n'
+                        f'{repr(self.game.current_player)} drew {repr(card)}.\n'
+                        f'{repr(self.game.current_player)} has a total of {total}!'
+                    )
+                    self.game.player_stand(self.game.current_player)
                 else:
                     update.message.reply_text(
                         f'{repr(self.game.current_player)} drew {repr(card)}.\n'
@@ -208,6 +215,7 @@ class BlackJackBot:
     def stand(self, update, context):
         player = update.message.from_user.id
         if player == self.game.current_player.telegram_id:
+            self.stop_timer(update, context)  # Stop the timer when the player takes their turn
             total = self.game.calculate_total(player)
             update.message.reply_text(f'{repr(self.game.current_player)} stands with a total of {total}.')
             self.game.player_stand(self.game.current_player)
