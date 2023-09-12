@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  telegram-bot:
+    build: .
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+    environment:
+      - TELEGRAM_TOKEN=5910527383:AAFWQX_gdoNYq_oKcsdzZ8RuEmP3dbNFMl0
