@@ -142,4 +142,9 @@ class BlackjackGame:
 
     def start_new_game(self):
         self.shuffle_deck()
+        self.shuffle_players()
         self.deal_initial_cards()
+
+    def shuffle_players(self):
+        random.shuffle(self.players)
+

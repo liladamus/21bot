@@ -236,7 +236,7 @@ class BlackJackBot:
     def endgame(self, update, context, tx):
         winners = self.game.determine_winners()
         message = ""
-        win_amount = self.game.starting_chips * len(self.game.players) / len(winners)
+        win_amount = self.game.starting_chips * len(self.game.players) / len(winners) if len(winners) > 0 else 0
 
         if len(winners) == 1:
             message = f'Game over! The winner is {repr(winners[0])} with a total of {self.game.calculate_total(winners[0].telegram_id)}!'
