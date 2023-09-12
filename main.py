@@ -195,10 +195,12 @@ class BlackJackBot:
                     )
                     self.game.bust_player(self.game.current_player)
                 elif total == 21:
-                    update.message.reply_text(
-                        f'🃏 blackjack! 🃏\n\n'
-                        f'{repr(self.game.current_player)} drew {repr(card)}.\n'
-                        f'{repr(self.game.current_player)} has a total of {total}!'
+                    # send audio file with caption of "BLACKJACK!"
+                    update.message.reply_audio(
+                        audio=open('21-tag.mp3', 'rb'),
+                        caption=f'🃏 BLACKJACK! 🃏\n\n'
+                                f'{repr(self.game.current_player)} drew {repr(card)}.\n'
+                                f'{repr(self.game.current_player)} has a total of {total}!'
                     )
                     self.game.player_stand(self.game.current_player)
                 else:
