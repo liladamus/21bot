@@ -110,7 +110,11 @@ class BlackjackGame:
                     break
                 next_index = (next_index + 1) % len(self.players)
             else:
-                self.current_player = None
+                # If no valid next player is found, allow the current player to play again
+                if not self.current_player.has_stood and not self.current_player.has_busted:
+                    self.current_player = self.current_player
+                else:
+                    self.current_player = None
         return self.current_player
 
     def determine_winners(self):
