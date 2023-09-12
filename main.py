@@ -197,7 +197,7 @@ class BlackJackBot:
                 elif total == 21:
                     # send audio file with caption of "BLACKJACK!"
                     update.message.reply_audio(
-                        audio=open('21-tag.mp3', 'rb'),
+                        audio=open('BLACKJACK.mp3', 'rb'),
                         caption=f'🃏 BLACKJACK! 🃏\n\n'
                                 f'{repr(self.game.current_player)} drew {repr(card)}.\n'
                                 f'{repr(self.game.current_player)} has a total of {total}!'
